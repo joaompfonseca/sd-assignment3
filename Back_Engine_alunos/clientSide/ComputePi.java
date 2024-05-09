@@ -5,7 +5,8 @@ import java.rmi.registry.Registry;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.math.BigDecimal;
-import genclass.GenericIO;
+import java.util.Scanner;
+
 import interfaces.Compute;
 
 /**
@@ -30,10 +31,12 @@ public class ComputePi
      String rmiRegHostName;
      int rmiRegPortNumb;
 
-     GenericIO.writeString ("Name of the processing node where the registering service is located? ");
-     rmiRegHostName = GenericIO.readlnString ();
-     GenericIO.writeString ("Port number where the registering service is listening to? ");
-     rmiRegPortNumb = GenericIO.readlnInt ();
+     Scanner sc= new Scanner(System.in);
+
+     System.out.println ("Name of the processing node where the registering service is located? ");
+     rmiRegHostName = sc.nextLine ();
+     System.out.println ("Port number where the registering service is listening to? ");
+     rmiRegPortNumb = sc.nextInt ();
 
     /* look for the remote object by name in the remote host registry */
 
@@ -45,7 +48,7 @@ public class ComputePi
      { registry = LocateRegistry.getRegistry (rmiRegHostName, rmiRegPortNumb);
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("RMI registry creation exception: " + e.getMessage ());
+     { System.out.println ("RMI registry creation exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
@@ -54,12 +57,12 @@ public class ComputePi
      { comp = (Compute) registry.lookup (nameEntry);
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("ComputePi look up exception: " + e.getMessage ());
+     { System.out.println ("ComputePi look up exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
      catch (NotBoundException e)
-     { GenericIO.writelnString ("ComputePi not bound exception: " + e.getMessage ());
+     { System.out.println ("ComputePi not bound exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
@@ -73,7 +76,7 @@ public class ComputePi
      { task = new Pi (Integer.parseInt (args[0]));
      }
      catch (NumberFormatException e)
-     { GenericIO.writelnString ("Pi instantiation exception: " + e.getMessage ());
+     { System.out.println ("Pi instantiation exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
@@ -84,12 +87,12 @@ public class ComputePi
      { pi = (BigDecimal) (comp.executeTask (task));
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("ComputePi remote invocation exception: " + e.getMessage ());
+     { System.out.println ("ComputePi remote invocation exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
 
      /* print the result */
-     GenericIO.writelnString (pi.toString ());
+     System.out.println (pi.toString ());
   }
 }

@@ -6,7 +6,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import genclass.GenericIO;
+import java.util.Scanner;
 import interfaces.Compute;
 import interfaces.Register;
 
@@ -31,16 +31,18 @@ public class ServerComputeEngine
      String rmiRegHostName;
      int rmiRegPortNumb;
 
-     GenericIO.writeString ("Name of the processing node where the registering service is located? ");
-     rmiRegHostName = GenericIO.readlnString ();
-     GenericIO.writeString ("Port number where the registering service is listening to? ");
-     rmiRegPortNumb = GenericIO.readlnInt ();
+     Scanner sc= new Scanner(System.in);
+
+     System.out.println ("Name of the processing node where the registering service is located? ");
+     rmiRegHostName = sc.nextLine ();
+     System.out.println ("Port number where the registering service is listening to? ");
+     rmiRegPortNumb = sc.nextInt ();
 
     /* create and install the security manager */
 
      if (System.getSecurityManager () == null)
         System.setSecurityManager (new SecurityManager ());
-     GenericIO.writelnString ("Security manager was installed!");
+     System.out.println ("Security manager was installed!");
 
     /* instantiate a remote object that runs mobile code and generate a stub for it */
 
@@ -52,11 +54,11 @@ public class ServerComputeEngine
      { engineStub = (Compute) UnicastRemoteObject.exportObject (engine, listeningPort);
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("ComputeEngine stub generation exception: " + e.getMessage ());
+     { System.out.println ("ComputeEngine stub generation exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
-     GenericIO.writelnString ("Stub was generated!");
+     System.out.println ("Stub was generated!");
 
     /* register it with the general registry service */
 
@@ -69,22 +71,22 @@ public class ServerComputeEngine
      { registry = LocateRegistry.getRegistry (rmiRegHostName, rmiRegPortNumb);
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("RMI registry creation exception: " + e.getMessage ());
+     { System.out.println ("RMI registry creation exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
-     GenericIO.writelnString ("RMI registry was created!");
+     System.out.println ("RMI registry was created!");
 
      try
      { reg = (Register) registry.lookup (nameEntryBase);
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("RegisterRemoteObject lookup exception: " + e.getMessage ());
+     { System.out.println ("RegisterRemoteObject lookup exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
      catch (NotBoundException e)
-     { GenericIO.writelnString ("RegisterRemoteObject not bound exception: " + e.getMessage ());
+     { System.out.println ("RegisterRemoteObject not bound exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
@@ -93,15 +95,15 @@ public class ServerComputeEngine
      { reg.bind (nameEntryObject, engineStub);
      }
      catch (RemoteException e)
-     { GenericIO.writelnString ("ComputeEngine registration exception: " + e.getMessage ());
+     { System.out.println ("ComputeEngine registration exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
      catch (AlreadyBoundException e)
-     { GenericIO.writelnString ("ComputeEngine already bound exception: " + e.getMessage ());
+     { System.out.println ("ComputeEngine already bound exception: " + e.getMessage ());
        e.printStackTrace ();
        System.exit (1);
      }
-     GenericIO.writelnString ("ComputeEngine object was registered!");
+     System.out.println ("ComputeEngine object was registered!");
  }
 }
