@@ -6,7 +6,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Scanner;
 
 /**
  * Instantiation and registering of a remote object that enables the registration of other remote objects
@@ -25,28 +24,28 @@ public class ServerRegisterRemoteObject {
      *
      * @param args runtime arguments
      *             <ul>
-     *                 <li>args[0] - Registry service hostname</li>
-     *                 <li>args[1] - Registry service port number</li>
+     *                 <li>args[0] - Registry server hostname</li>
+     *                 <li>args[1] - Registry server port number</li>
      *             </ul>
      */
     public static void main(String[] args) {
         // Runtime arguments
-        String rmiHost;
-        int rmiPort = -1;
+        String regHost;
+        int regPort = -1;
 
         // Validate and parse runtime arguments
-        if (args.length != 6) {
+        if (args.length != 2) {
             System.err.println("Wrong number of parameters!");
             System.exit(1);
         }
-        rmiHost = args[0];
+        regHost = args[0];
         try {
-            rmiPort = Integer.parseInt(args[1]);
+            regPort = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
             System.err.println("args[1] is not a number!");
             System.exit(1);
         }
-        if ((rmiPort < 4000) || (rmiPort >= 65536)) {
+        if ((regPort < 4000) || (regPort >= 65536)) {
             System.out.println("args[1] is not a valid port number!");
             System.exit(1);
         }
@@ -59,7 +58,7 @@ public class ServerRegisterRemoteObject {
 
         // instantiate a registration remote object and generate a stub for it
 
-        RegisterRemoteObject regEngine = new RegisterRemoteObject(rmiHost, rmiPort);
+        RegisterRemoteObject regEngine = new RegisterRemoteObject(regHost, regPort);
         Register regEngineStub = null;
         int listeningPort = 22001;
 
@@ -77,7 +76,7 @@ public class ServerRegisterRemoteObject {
         Registry registry = null;
 
         try {
-            registry = LocateRegistry.getRegistry(rmiHost, rmiPort);
+            registry = LocateRegistry.getRegistry(regHost, regPort);
         } catch (RemoteException e) {
             System.out.println("RMI registry creation exception: " + e.getMessage());
             System.exit(1);
