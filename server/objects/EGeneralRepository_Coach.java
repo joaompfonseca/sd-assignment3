@@ -1,4 +1,4 @@
-package server.sharedregions;
+package server.objects;
 
 /**
  * Possible states of the coach.

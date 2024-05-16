@@ -39,8 +39,9 @@ public class RefereeClient {
         int regPort = -1;
 
         // Shared regions
-        String pgName = "Playground", rsName = "RefereeSite";
+        String pgName = "Playground";
         IPlayground pgObj = null;
+        String rsName = "RefereeSite";
         IRefereeSite rsObj = null;
 
         // Validate and parse runtime arguments

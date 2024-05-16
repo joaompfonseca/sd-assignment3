@@ -5,4 +5,4 @@
  * @author João Fonseca (103154)
  * @version 1.0
  */
-package server.sharedregions;
+package server.objects;

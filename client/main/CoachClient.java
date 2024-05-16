@@ -39,9 +39,11 @@ public class CoachClient {
         int regPort = -1;
 
         // Shared regions
-        String cbName = "ContestantsBench", pgName = "Playground", rsName = "RefereeSite";
+        String cbName = "ContestantsBench";
         IContestantsBench cbObj = null;
+        String pgName = "Playground";
         IPlayground pgObj = null;
+        String rsName = "RefereeSite";
         IRefereeSite rsObj = null;
 
         // Validate and parse runtime arguments

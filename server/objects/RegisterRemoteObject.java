@@ -1,4 +1,4 @@
-package registry;
+package server.objects;
 
 import interfaces.Register;
 
@@ -23,25 +23,25 @@ public class RegisterRemoteObject implements Register {
     /**
      * Name of the local host (where the registering service is supposed to be located).
      */
-    private String regHost;
+    private String rmiHost;
 
     /**
      * Port number where the local registering service is listening to.
      */
-    private int regPort = 1099;
+    private int rmiPort = 1099;
 
     /**
      * Instantiation of a registering object (where the registering service is supposed to be located).
      *
-     * @param regHost name of local host
-     * @param regPort port number where the local registering service is listening to
+     * @param rmiHost name of local host
+     * @param rmiPort port number where the local registering service is listening to
      */
-    public RegisterRemoteObject(String regHost, int regPort) {
-        if ((regHost == null) || ("".equals(regHost)))
+    public RegisterRemoteObject(String rmiHost, int rmiPort) {
+        if ((rmiHost == null) || ("".equals(rmiHost)))
             throw new NullPointerException("RegisterRemoteObject: null pointer parameter on instantiation!");
-        this.regHost = regHost;
-        if ((regPort >= 4000) && (regPort <= 65535))
-            this.regPort = regPort;
+        this.rmiHost = rmiHost;
+        if ((rmiPort >= 4000) && (rmiPort <= 65535))
+            this.rmiPort = rmiPort;
     }
 
     /**
@@ -59,7 +59,7 @@ public class RegisterRemoteObject implements Register {
 
         if ((name == null) || (ref == null))
             throw new NullPointerException("RegisterRemoteObject: null pointer parameter(s) on on bind!");
-        registry = LocateRegistry.getRegistry(regHost, regPort);
+        registry = LocateRegistry.getRegistry(rmiHost, rmiPort);
         registry.bind(name, ref);
     }
 
@@ -77,7 +77,7 @@ public class RegisterRemoteObject implements Register {
 
         if ((name == null))
             throw new NullPointerException("RegisterRemoteObject: null pointer parameter(s) on unbind!");
-        registry = LocateRegistry.getRegistry(regHost, regPort);
+        registry = LocateRegistry.getRegistry(rmiHost, rmiPort);
         registry.unbind(name);
     }
 
@@ -97,7 +97,7 @@ public class RegisterRemoteObject implements Register {
 
         if ((name == null) || (ref == null))
             throw new NullPointerException("RegisterRemoteObject: null pointer parameter(s) on rebind!");
-        registry = LocateRegistry.getRegistry(regHost, regPort);
+        registry = LocateRegistry.getRegistry(rmiHost, rmiPort);
         registry.rebind(name, ref);
     }
 }

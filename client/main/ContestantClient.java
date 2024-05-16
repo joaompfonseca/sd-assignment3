@@ -39,8 +39,9 @@ public class ContestantClient {
         int regPort = -1;
 
         // Shared regions
-        String cbName = "ContestantsBench", pgName = "Playground";
+        String cbName = "ContestantsBench";
         IContestantsBench cbObj = null;
+        String pgName = "Playground";
         IPlayground pgObj = null;
 
         // Validate and parse runtime arguments

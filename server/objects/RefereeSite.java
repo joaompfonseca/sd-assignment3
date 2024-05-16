@@ -1,4 +1,4 @@
-package server.sharedregions;
+package server.objects;
 
 import interfaces.generalrepository.IGeneralRepository_Site;
 import interfaces.refereesite.IRefereeSite;

@@ -1,4 +1,4 @@
-package server.sharedregions;
+package server.objects;
 
 import interfaces.generalrepository.IGeneralRepository;
 
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static server.sharedregions.EGeneralRepository_Coach.*;
-import static server.sharedregions.EGeneralRepository_Contestant.*;
-import static server.sharedregions.EGeneralRepository_Referee.*;
+import static server.objects.EGeneralRepository_Coach.*;
+import static server.objects.EGeneralRepository_Contestant.*;
+import static server.objects.EGeneralRepository_Referee.*;
 
 /**
  * General Repository of Information.

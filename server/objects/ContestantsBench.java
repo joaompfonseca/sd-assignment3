@@ -1,4 +1,4 @@
-package server.sharedregions;
+package server.objects;
 
 import interfaces.contestantsbench.IContestantsBench;
 import interfaces.generalrepository.IGeneralRepository_Bench;
