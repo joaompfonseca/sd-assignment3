@@ -2,6 +2,7 @@ package server.objects;
 
 import interfaces.generalrepository.IGeneralRepository_Site;
 import interfaces.refereesite.IRefereeSite;
+import server.main.ServerRefereeSite;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -181,7 +182,7 @@ public class RefereeSite implements IRefereeSite {
             nEntities += 1;
             if (nEntities >= 2) {
                 generalRepository.shutdown();
-                RefereeSiteServer.waitConnection = false;
+                ServerRefereeSite.shutdown();
             }
         } finally {
             lock.unlock();

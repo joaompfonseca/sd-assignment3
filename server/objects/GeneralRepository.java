@@ -1,6 +1,7 @@
 package server.objects;
 
 import interfaces.generalrepository.IGeneralRepository;
+import server.main.ServerGeneralRepository;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -487,7 +488,7 @@ public class GeneralRepository implements IGeneralRepository {
         try {
             nEntities += 1;
             if (nEntities >= 3) {
-                GeneralRepositoryServer.waitConnection = false;
+                ServerGeneralRepository.shutdown();
             }
         } finally {
             lock.unlock();

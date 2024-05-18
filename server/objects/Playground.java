@@ -2,6 +2,7 @@ package server.objects;
 
 import interfaces.generalrepository.IGeneralRepository_Playground;
 import interfaces.playground.IPlayground;
+import server.main.ServerPlayground;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -287,7 +288,7 @@ public class Playground implements IPlayground {
             nEntities += 1;
             if (nEntities >= 3) {
                 generalRepository.shutdown();
-                PlaygroundServer.waitConnection = false;
+                ServerPlayground.shutdown();
             }
         } finally {
             lock.unlock();

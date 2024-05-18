@@ -2,6 +2,7 @@ package server.objects;
 
 import interfaces.contestantsbench.IContestantsBench;
 import interfaces.generalrepository.IGeneralRepository_Bench;
+import server.main.ServerContestantsBench;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -223,7 +224,7 @@ public class ContestantsBench implements IContestantsBench {
             nEntities += 1;
             if (nEntities >= 2) {
                 generalRepository.shutdown();
-                ContestantsBenchServer.waitConnection = false;
+                ServerContestantsBench.shutdown();
             }
         } finally {
             lock.unlock();
