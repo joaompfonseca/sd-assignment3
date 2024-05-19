@@ -101,8 +101,12 @@ public class RefereeClient {
         }
 
         // Shutdown stubs
-        pgObj.shutdown();
-        rsObj.shutdown();
+        try {
+            pgObj.shutdown();
+            rsObj.shutdown();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

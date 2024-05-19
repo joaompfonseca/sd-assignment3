@@ -5,6 +5,7 @@ import server.main.ServerGeneralRepository;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.rmi.RemoteException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -176,7 +177,7 @@ public class GeneralRepository implements IGeneralRepository {
      * @param id               the contestant id
      * @param increaseStrength if the strength of the contestant should be increased
      */
-    public void seatDown(int team, int id, boolean increaseStrength) {
+    public void seatDown(int team, int id, boolean increaseStrength) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -203,7 +204,7 @@ public class GeneralRepository implements IGeneralRepository {
      *
      * @param team the team
      */
-    public void callContestants(int team) {
+    public void callContestants(int team) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -225,7 +226,7 @@ public class GeneralRepository implements IGeneralRepository {
      * @param team the team
      * @param id   the contestant id
      */
-    public void followCoachAdvice(int team, int id) {
+    public void followCoachAdvice(int team, int id) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -248,7 +249,7 @@ public class GeneralRepository implements IGeneralRepository {
      * @param team the team
      * @param id   the id contestant
      */
-    public void getReady(int team, int id) {
+    public void getReady(int team, int id) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -269,7 +270,7 @@ public class GeneralRepository implements IGeneralRepository {
      *
      * @param team the team
      */
-    public void informReferee(int team) {
+    public void informReferee(int team) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -286,7 +287,7 @@ public class GeneralRepository implements IGeneralRepository {
     /**
      * Set the new state of the referee when he starts the trial.
      */
-    public void startTrial() {
+    public void startTrial() throws RemoteException {
         lock.lock();
         try {
             refereeStatus = WAIT_FOR_TRIAL_CONCLUSION.label;
@@ -308,7 +309,7 @@ public class GeneralRepository implements IGeneralRepository {
      * @param contestant the contestant
      * @param reduce     if the strength of the contestant should be reduced
      */
-    public void pullTheRope(int team, int contestant, boolean reduce) {
+    public void pullTheRope(int team, int contestant, boolean reduce) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -331,7 +332,7 @@ public class GeneralRepository implements IGeneralRepository {
     /**
      * Set the new state of the contestant when he's done.
      */
-    public void amDone() {
+    public void amDone() throws RemoteException {
         lock.lock();
         try {
             // It's not necessary to do anything here because the contestant doesn't need to change its status or strength
@@ -346,7 +347,7 @@ public class GeneralRepository implements IGeneralRepository {
      *
      * @param p the rope position
      */
-    public void assertTrialDecision(int p) {
+    public void assertTrialDecision(int p) throws RemoteException {
         lock.lock();
         try {
             // Save rope position
@@ -362,7 +363,7 @@ public class GeneralRepository implements IGeneralRepository {
      *
      * @param team the team
      */
-    public void reviewNotes(int team) {
+    public void reviewNotes(int team) throws RemoteException {
         lock.lock();
         try {
             if (team == 0) {
@@ -381,7 +382,7 @@ public class GeneralRepository implements IGeneralRepository {
     /**
      * Set the new state of the referee when he announces a new game.
      */
-    public void announceNewGame() {
+    public void announceNewGame() throws RemoteException {
         lock.lock();
         try {
             refereeStatus = START_OF_A_GAME.label;
@@ -402,7 +403,7 @@ public class GeneralRepository implements IGeneralRepository {
     /**
      * Set the new state of the referee when he calls a trial.
      */
-    public void callTrial() {
+    public void callTrial() throws RemoteException {
         lock.lock();
         try {
             selectedContestantsTeam1.clear();
@@ -424,7 +425,7 @@ public class GeneralRepository implements IGeneralRepository {
      * @param team     the team
      * @param knockout the knockout flag
      */
-    public void declareGameWinner(int team, boolean knockout) {
+    public void declareGameWinner(int team, boolean knockout) throws RemoteException {
         lock.lock();
         try {
             refereeStatus = END_OF_A_GAME.label;
@@ -456,7 +457,7 @@ public class GeneralRepository implements IGeneralRepository {
      *
      * @param team the team
      */
-    public void declareMatchWinner(int team) {
+    public void declareMatchWinner(int team) throws RemoteException {
         lock.lock();
         try {
             refereeStatus = END_OF_THE_MATCH.label;
@@ -483,7 +484,7 @@ public class GeneralRepository implements IGeneralRepository {
     /**
      * Operation server shutdown.
      */
-    public void shutdown() {
+    public void shutdown() throws RemoteException {
         lock.lock();
         try {
             nEntities += 1;

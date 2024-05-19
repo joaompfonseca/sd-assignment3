@@ -1,5 +1,8 @@
 package interfaces.contestantsbench;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * Interface for the contestant in the contestants bench.
  *
@@ -7,7 +10,7 @@ package interfaces.contestantsbench;
  * @author João Fonseca (103154)
  * @version 1.0
  */
-public interface IContestantsBench_Contestant {
+public interface IContestantsBench_Contestant extends Remote {
     /**
      * The contestant seats down and waits for the coach to call him. The last contestant to seat down alerts the coach.
      * The contestant waits for the coach to select him. If the coach does not select him, the contestant increases his
@@ -18,7 +21,7 @@ public interface IContestantsBench_Contestant {
      * @param strength   the strength of the contestant
      * @return the strength of the contestant
      */
-    int seatDown(int team, int contestant, int strength);
+    public int seatDown(int team, int contestant, int strength) throws RemoteException;
 
     /**
      * The contestant follows the coach advice.
@@ -27,5 +30,5 @@ public interface IContestantsBench_Contestant {
      * @param contestant the contestant
      * @return true if the match has not ended, false otherwise
      */
-    boolean followCoachAdvice(int team, int contestant);
+    public boolean followCoachAdvice(int team, int contestant) throws RemoteException;
 }

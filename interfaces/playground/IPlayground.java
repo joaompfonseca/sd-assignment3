@@ -1,6 +1,7 @@
 package interfaces.playground;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  * General interface for the playground, that extends from the playground interfaces for the playground.
@@ -13,5 +14,5 @@ public interface IPlayground extends IPlayground_Coach, IPlayground_Contestant, 
     /**
      * Shutdown the server.
      */
-    void shutdown();
+    public void shutdown() throws RemoteException;
 }

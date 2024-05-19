@@ -1,5 +1,8 @@
 package interfaces.generalrepository;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * Interface for the bench in the general repository.
  *
@@ -7,7 +10,7 @@ package interfaces.generalrepository;
  * @author João Fonseca (103154)
  * @version 1.0
  */
-public interface IGeneralRepository_Bench {
+public interface IGeneralRepository_Bench extends Remote {
     /**
      * Set the new state of the contestant when he seats down.
      *
@@ -15,14 +18,14 @@ public interface IGeneralRepository_Bench {
      * @param id               the contestant id
      * @param increaseStrength if the strength of the contestant should be increased
      */
-    void seatDown(int team, int id, boolean increaseStrength);
+    public void seatDown(int team, int id, boolean increaseStrength) throws RemoteException;
 
     /**
      * Set the new state of the coach when he calls the contestants.
      *
      * @param team the team
      */
-    void callContestants(int team);
+    public void callContestants(int team) throws RemoteException;
 
     /**
      * Set the new state of the contestant when he is called by the coach.
@@ -30,10 +33,5 @@ public interface IGeneralRepository_Bench {
      * @param team the team
      * @param id   the contestant id
      */
-    void followCoachAdvice(int team, int id);
-
-    /**
-     * Shutdown the server.
-     */
-    void shutdown();
+    public void followCoachAdvice(int team, int id) throws RemoteException;
 }

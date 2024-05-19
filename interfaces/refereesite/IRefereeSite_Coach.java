@@ -1,5 +1,8 @@
 package interfaces.refereesite;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * Interface for the coach in the referee site.
  *
@@ -7,7 +10,7 @@ package interfaces.refereesite;
  * @author João Fonseca (103154)
  * @version 1.0
  */
-public interface IRefereeSite_Coach {
+public interface IRefereeSite_Coach extends Remote {
     /**
      * The coach waits for the referee command.
      *
@@ -15,5 +18,5 @@ public interface IRefereeSite_Coach {
      *
      * @return true if the match has not ended, false otherwise
      */
-    boolean reviewNotes(int team);
+    public boolean reviewNotes(int team) throws RemoteException;
 }

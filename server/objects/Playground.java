@@ -1,9 +1,11 @@
 package server.objects;
 
+import interfaces.generalrepository.IGeneralRepository;
 import interfaces.generalrepository.IGeneralRepository_Playground;
 import interfaces.playground.IPlayground;
 import server.main.ServerPlayground;
 
+import java.rmi.RemoteException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -121,7 +123,7 @@ public class Playground implements IPlayground {
      *
      * @param ropePosition the rope position
      */
-    public void setRopePosition(int ropePosition) {
+    public void setRopePosition(int ropePosition) throws RemoteException {
         try {
             lock.lock();
             this.ropePosition = ropePosition;
@@ -137,7 +139,7 @@ public class Playground implements IPlayground {
      * @param team       the team
      * @param contestant the contestant
      */
-    public void getReady(int team, int contestant) {
+    public void getReady(int team, int contestant) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -162,7 +164,7 @@ public class Playground implements IPlayground {
      *
      * @param team the team
      */
-    public void informReferee(int team) {
+    public void informReferee(int team) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -187,7 +189,7 @@ public class Playground implements IPlayground {
     /**
      * The referee waits for the coaches to be ready to announce the start of the trial.
      */
-    public void startTrial() {
+    public void startTrial() throws RemoteException {
         lock.lock();
         try {
             while (countInformed < 2) {
@@ -213,7 +215,7 @@ public class Playground implements IPlayground {
      * @param strength   the current strength
      * @return the updated strength
      */
-    public int pullTheRope(int team, int contestant, int strength) {
+    public int pullTheRope(int team, int contestant, int strength) throws RemoteException {
         lock.lock();
         try {
             ropePosition += (team == 0) ? -strength : strength;
@@ -234,7 +236,7 @@ public class Playground implements IPlayground {
      * The last contestant informs the referee that the trial is over. The contestant waits for the referee to decide
      * the result of the trial.
      */
-    public void amDone() {
+    public void amDone() throws RemoteException {
         lock.lock();
         try {
             contestantsDone++;
@@ -257,7 +259,7 @@ public class Playground implements IPlayground {
      *
      * @return the rope position
      */
-    public int assertTrialDecision() {
+    public int assertTrialDecision() throws RemoteException {
         lock.lock();
         try {
             while (contestantsDone < 2 * contestantsPerTrial) {
@@ -282,12 +284,12 @@ public class Playground implements IPlayground {
     /**
      * Operation server shutdown.
      */
-    public void shutdown() {
+    public void shutdown() throws RemoteException {
         lock.lock();
         try {
             nEntities += 1;
             if (nEntities >= 3) {
-                generalRepository.shutdown();
+                ((IGeneralRepository)generalRepository).shutdown();
                 ServerPlayground.shutdown();
             }
         } finally {

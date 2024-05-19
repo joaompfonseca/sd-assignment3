@@ -1,6 +1,7 @@
 package interfaces.contestantsbench;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  * General interface for the contestants bench, that extends from the contestants bench interfaces for the contestant
@@ -14,5 +15,5 @@ public interface IContestantsBench extends IContestantsBench_Contestant, IContes
     /**
      * Shutdown the server.
      */
-    void shutdown();
+    public void shutdown() throws RemoteException;
 }

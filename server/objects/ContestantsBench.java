@@ -1,9 +1,11 @@
 package server.objects;
 
 import interfaces.contestantsbench.IContestantsBench;
+import interfaces.generalrepository.IGeneralRepository;
 import interfaces.generalrepository.IGeneralRepository_Bench;
 import server.main.ServerContestantsBench;
 
+import java.rmi.RemoteException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -105,7 +107,7 @@ public class ContestantsBench implements IContestantsBench {
      * @param team the team
      * @return the strengths of the team
      */
-    public int[] getTeamStrengths(int team) {
+    public int[] getTeamStrengths(int team) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -126,7 +128,7 @@ public class ContestantsBench implements IContestantsBench {
      * @param team       the team
      * @param isMatchEnd the match end flag
      */
-    public void setTeamIsMatchEnd(int team, boolean isMatchEnd) {
+    public void setTeamIsMatchEnd(int team, boolean isMatchEnd) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -146,7 +148,7 @@ public class ContestantsBench implements IContestantsBench {
      * @param strength   the strength of the contestant
      * @return the strength of the contestant
      */
-    public int seatDown(int team, int contestant, int strength) {
+    public int seatDown(int team, int contestant, int strength) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -179,7 +181,7 @@ public class ContestantsBench implements IContestantsBench {
      * @param team     the team
      * @param selected the selected contestants
      */
-    public void callContestants(int team, boolean[] selected) {
+    public void callContestants(int team, boolean[] selected) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -203,7 +205,7 @@ public class ContestantsBench implements IContestantsBench {
      * @param contestant the contestant
      * @return true if the match has not ended, false otherwise
      */
-    public boolean followCoachAdvice(int team, int contestant) {
+    public boolean followCoachAdvice(int team, int contestant) throws RemoteException {
         TeamData teamData = this.teamData[team];
         lock.lock();
         try {
@@ -218,12 +220,12 @@ public class ContestantsBench implements IContestantsBench {
     /**
      * Operation server shutdown.
      */
-    public void shutdown() {
+    public void shutdown() throws RemoteException {
         lock.lock();
         try {
             nEntities += 1;
             if (nEntities >= 2) {
-                generalRepository.shutdown();
+                ((IGeneralRepository) generalRepository).shutdown();
                 ServerContestantsBench.shutdown();
             }
         } finally {

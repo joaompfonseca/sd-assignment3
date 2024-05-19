@@ -110,9 +110,13 @@ public class CoachClient {
         }
 
         // Shutdown stubs
-        cbObj.shutdown();
-        pgObj.shutdown();
-        rsObj.shutdown();
+        try {
+            cbObj.shutdown();
+            pgObj.shutdown();
+            rsObj.shutdown();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

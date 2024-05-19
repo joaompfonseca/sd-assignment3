@@ -1,9 +1,11 @@
 package server.objects;
 
+import interfaces.generalrepository.IGeneralRepository;
 import interfaces.generalrepository.IGeneralRepository_Site;
 import interfaces.refereesite.IRefereeSite;
 import server.main.ServerRefereeSite;
 
+import java.rmi.RemoteException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -76,7 +78,7 @@ public class RefereeSite implements IRefereeSite {
      * @param team the team of the coach
      * @return true if the match has not ended, false otherwise
      */
-    public boolean reviewNotes(int team) {
+    public boolean reviewNotes(int team) throws RemoteException {
         lock.lock();
         try {
             waiting++;
@@ -102,7 +104,7 @@ public class RefereeSite implements IRefereeSite {
     /**
      * The referee announces a new game.
      */
-    public void announceNewGame() {
+    public void announceNewGame() throws RemoteException {
         lock.lock();
         try {
             generalRepository.announceNewGame();
@@ -115,7 +117,7 @@ public class RefereeSite implements IRefereeSite {
      * The referee calls the trial. The referee waits for the coaches to be ready to receive the command to call the
      * trial. The coaches will know the match has not ended.
      */
-    public void callTrial() {
+    public void callTrial() throws RemoteException {
         lock.lock();
         try {
             while (waiting < 2) {
@@ -138,7 +140,7 @@ public class RefereeSite implements IRefereeSite {
      * @param team     the team that won the game
      * @param knockout true if the game was a knockout, false otherwise
      */
-    public void declareGameWinner(int team, boolean knockout) {
+    public void declareGameWinner(int team, boolean knockout) throws RemoteException {
         lock.lock();
         try {
             winTeamGame = team;
@@ -154,7 +156,7 @@ public class RefereeSite implements IRefereeSite {
      *
      * @param team the team that won the match
      */
-    public void declareMatchWinner(int team) {
+    public void declareMatchWinner(int team) throws RemoteException {
         lock.lock();
         try {
             winTeamMatch = team;
@@ -176,12 +178,12 @@ public class RefereeSite implements IRefereeSite {
     /**
      * Operation server shutdown.
      */
-    public void shutdown() {
+    public void shutdown() throws RemoteException {
         lock.lock();
         try {
             nEntities += 1;
             if (nEntities >= 2) {
-                generalRepository.shutdown();
+                ((IGeneralRepository)generalRepository).shutdown();
                 ServerRefereeSite.shutdown();
             }
         } finally {

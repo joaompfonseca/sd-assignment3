@@ -109,8 +109,12 @@ public class ContestantClient {
         }
 
         // Shutdown stubs
-        cbObj.shutdown();
-        pgObj.shutdown();
+        try {
+            cbObj.shutdown();
+            pgObj.shutdown();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

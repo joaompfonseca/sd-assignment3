@@ -63,21 +63,25 @@ public class TContestant extends Thread {
      */
     @Override
     public void run() {
-        while (true) {
-            strength = contestantsBench.seatDown(team, contestant, strength);
-            boolean keepRunning = contestantsBench.followCoachAdvice(team, contestant);
-            if (!keepRunning) {
-                break;
+        try {
+            while (true) {
+                strength = contestantsBench.seatDown(team, contestant, strength);
+                boolean keepRunning = contestantsBench.followCoachAdvice(team, contestant);
+                if (!keepRunning) {
+                    break;
+                }
+                playground.getReady(team, contestant);
+                try {
+                    Thread.sleep((long) (Math.random() * maxSleepMs));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    break;
+                }
+                strength = playground.pullTheRope(team, contestant, strength);
+                playground.amDone();
             }
-            playground.getReady(team, contestant);
-            try {
-                Thread.sleep((long) (Math.random() * maxSleepMs));
-            } catch (Exception e) {
-                e.printStackTrace();
-                break;
-            }
-            strength = playground.pullTheRope(team, contestant, strength);
-            playground.amDone();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

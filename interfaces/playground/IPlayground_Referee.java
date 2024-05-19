@@ -1,5 +1,8 @@
 package interfaces.playground;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * Interface of the referee in the playground.
  *
@@ -7,23 +10,23 @@ package interfaces.playground;
  * @author João Fonseca (103154)
  * @version 1.0
  */
-public interface IPlayground_Referee {
+public interface IPlayground_Referee extends Remote {
     /**
      * The referee waits for the coaches to be ready to announce the start of the trial.
      */
-    void startTrial();
+    public void startTrial() throws RemoteException;
 
     /**
      * The referee waits for the contestants to be done to decide the result of the trial.
      *
      * @return the rope position
      */
-    int assertTrialDecision();
+    public int assertTrialDecision() throws RemoteException;
 
     /**
      * The referee sets the rope position.
      *
      * @param ropePosition the rope position
      */
-    void setRopePosition(int ropePosition);
+    public void setRopePosition(int ropePosition) throws RemoteException;
 }

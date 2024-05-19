@@ -130,17 +130,21 @@ public class TCoach extends Thread {
      */
     @Override
     public void run() {
-        while (true) {
-            boolean keepRunning = refereeSite.reviewNotes(team);
-            if (!keepRunning) {
-                // let contestants know the match is over
-                contestantsBench.setTeamIsMatchEnd(team, true);
-                contestantsBench.callContestants(team, selectAllContestants());
-                break;
+        try {
+            while (true) {
+                boolean keepRunning = refereeSite.reviewNotes(team);
+                if (!keepRunning) {
+                    // let contestants know the match is over
+                    contestantsBench.setTeamIsMatchEnd(team, true);
+                    contestantsBench.callContestants(team, selectAllContestants());
+                    break;
+                }
+                int[] strengths = contestantsBench.getTeamStrengths(team);
+                contestantsBench.callContestants(team, selectContestants(strengths, mistakeProbability));
+                playground.informReferee(team);
             }
-            int[] strengths = contestantsBench.getTeamStrengths(team);
-            contestantsBench.callContestants(team, selectContestants(strengths, mistakeProbability));
-            playground.informReferee(team);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
