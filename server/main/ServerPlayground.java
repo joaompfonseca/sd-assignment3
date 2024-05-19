@@ -29,11 +29,14 @@ public class ServerPlayground {
     public static boolean waitConnection = false;
 
     /**
-     *  Main method.
+     * Main method.
      *
-     *        args[0] - port number for listening to service requests
-     *        args[1] - name of the platform where is located the RMI registering service
-     *        args[2] - port number where the registering service is listening to service requests
+     * @param args runtime arguments
+     *             <ul>
+     *                 <li>args[0] - port number for listening to service requests</li>
+     *                 <li>args[1] - RMI registry server hostname</li>
+     *                 <li>args[2] - RMI registry server port number</li>
+     *             </ul>
      */
     public static void main(String[] args) {
         int portNumb = -1;              // port number for listening to service requests
@@ -148,7 +151,7 @@ public class ServerPlayground {
         /* wait for the end of operations */
         System.out.println("Playground is in operation!");
         try {
-            while(!waitConnection){
+            while (!waitConnection) {
                 synchronized (Class.forName("server.main.ServerPlayground")) {
                     try {
                         Class.forName("server.main.ServerPlayground").wait();
@@ -195,7 +198,7 @@ public class ServerPlayground {
     }
 
     /**
-     *  Close of operations.
+     * Close of operations.
      */
     public static void shutdown() {
         waitConnection = true;
@@ -208,5 +211,11 @@ public class ServerPlayground {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    /**
+     * Private constructor to hide the implicit public one.
+     */
+    private ServerPlayground() {
     }
 }

@@ -13,6 +13,8 @@ import java.rmi.RemoteException;
 public interface IPlayground_Referee extends Remote {
     /**
      * The referee waits for the coaches to be ready to announce the start of the trial.
+     *
+     * @throws RemoteException a remote exception
      */
     public void startTrial() throws RemoteException;
 
@@ -20,6 +22,7 @@ public interface IPlayground_Referee extends Remote {
      * The referee waits for the contestants to be done to decide the result of the trial.
      *
      * @return the rope position
+     * @throws RemoteException a remote exception
      */
     public int assertTrialDecision() throws RemoteException;
 
@@ -27,6 +30,7 @@ public interface IPlayground_Referee extends Remote {
      * The referee sets the rope position.
      *
      * @param ropePosition the rope position
+     * @throws RemoteException a remote exception
      */
     public void setRopePosition(int ropePosition) throws RemoteException;
 }

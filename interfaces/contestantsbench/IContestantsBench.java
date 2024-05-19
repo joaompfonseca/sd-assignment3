@@ -14,6 +14,8 @@ import java.rmi.RemoteException;
 public interface IContestantsBench extends IContestantsBench_Contestant, IContestantsBench_Coach, Remote {
     /**
      * Shutdown the server.
+     *
+     * @throws RemoteException a remote exception
      */
     public void shutdown() throws RemoteException;
 }

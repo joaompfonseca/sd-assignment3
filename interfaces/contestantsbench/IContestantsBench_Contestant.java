@@ -20,15 +20,17 @@ public interface IContestantsBench_Contestant extends Remote {
      * @param contestant the contestant
      * @param strength   the strength of the contestant
      * @return the strength of the contestant
+     * @throws RemoteException a remote exception
      */
     public int seatDown(int team, int contestant, int strength) throws RemoteException;
 
     /**
      * The contestant follows the coach advice.
      *
-     * @param team the team
+     * @param team       the team
      * @param contestant the contestant
      * @return true if the match has not ended, false otherwise
+     * @throws RemoteException a remote exception
      */
     public boolean followCoachAdvice(int team, int contestant) throws RemoteException;
 }

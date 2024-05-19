@@ -17,6 +17,7 @@ public interface IContestantsBench_Coach extends Remote {
      *
      * @param team     the team
      * @param selected the selected contestants
+     * @throws RemoteException a remote exception
      */
     public void callContestants(int team, boolean[] selected) throws RemoteException;
 
@@ -26,6 +27,7 @@ public interface IContestantsBench_Coach extends Remote {
      *
      * @param team the team
      * @return the strengths of the team
+     * @throws RemoteException a remote exception
      */
     public int[] getTeamStrengths(int team) throws RemoteException;
 
@@ -34,6 +36,7 @@ public interface IContestantsBench_Coach extends Remote {
      *
      * @param team       the team
      * @param isMatchEnd the match end flag
+     * @throws RemoteException a remote exception
      */
     public void setTeamIsMatchEnd(int team, boolean isMatchEnd) throws RemoteException;
 }

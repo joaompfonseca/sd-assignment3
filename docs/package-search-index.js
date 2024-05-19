@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"client.entities"},{"l":"client.main"},{"l":"configuration"},{"l":"interfaces"},{"l":"interfaces.contestantsbench"},{"l":"interfaces.generalrepository"},{"l":"interfaces.playground"},{"l":"interfaces.refereesite"},{"l":"server.main"},{"l":"server.objects"}];updateSearchResults();

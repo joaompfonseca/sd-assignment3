@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 public interface IPlayground extends IPlayground_Coach, IPlayground_Contestant, IPlayground_Referee, Remote {
     /**
      * Shutdown the server.
+     * @throws RemoteException a remote exception
      */
     public void shutdown() throws RemoteException;
 }

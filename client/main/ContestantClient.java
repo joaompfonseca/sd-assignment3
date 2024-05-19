@@ -29,8 +29,8 @@ public class ContestantClient {
      *
      * @param args runtime arguments
      *             <ul>
-     *                 <li>args[0]: Registry server hostname</li>
-     *                 <li>args[1]: Registry server port number</li>
+     *                 <li>args[0]: RMI registry server hostname</li>
+     *                 <li>args[1]: RMI registry server port number</li>
      *             </ul>
      */
     public static void main(String[] args) {

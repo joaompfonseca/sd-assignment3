@@ -30,9 +30,12 @@ public class ServerRefereeSite {
     /**
      *  Main method.
      *
-     *        args[0] - port number for listening to service requests
-     *        args[1] - name of the platform where is located the RMI registering service
-     *        args[2] - port number where the registering service is listening to service requests
+     * @param args runtime arguments
+     *             <ul>
+     *                 <li>args[0] - port number for listening to service requests</li>
+     *                 <li>args[1] - RMI registry server hostname</li>
+     *                 <li>args[2] - RMI registry server port number</li>
+     *             </ul>
      */
     public static void main(String[] args) {
         int portNumb = -1;              // port number for listening to service requests
@@ -206,5 +209,11 @@ public class ServerRefereeSite {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    /**
+     * Private constructor to hide the implicit public one.
+     */
+    private ServerRefereeSite() {
     }
 }

@@ -14,6 +14,8 @@ import java.rmi.RemoteException;
 public interface IGeneralRepository extends IGeneralRepository_Site, IGeneralRepository_Bench, IGeneralRepository_Playground, Remote {
     /**
      * Shutdown the server.
+     *
+     * @throws RemoteException a remote exception
      */
     public void shutdown() throws RemoteException;
 }

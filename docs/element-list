@@ -1,0 +1,10 @@
+client.entities
+client.main
+configuration
+interfaces
+interfaces.contestantsbench
+interfaces.generalrepository
+interfaces.playground
+interfaces.refereesite
+server.main
+server.objects

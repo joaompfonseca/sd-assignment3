@@ -25,9 +25,9 @@ public class ServerRegisterRemoteObject {
      *
      * @param args runtime arguments
      *             <ul>
-     *                 <li>args[0] - Registry server listening port</li>
-     *                 <li>args[1] - RMI server hostname</li>
-     *                 <li>args[2] - RMI server port number</li>
+     *                 <li>args[0] - port number for listening to service requests</li>
+     *                 <li>args[1] - RMI registry server hostname</li>
+     *                 <li>args[2] - RMI registry server port number</li>
      *             </ul>
      */
     public static void main(String[] args) {
@@ -102,5 +102,11 @@ public class ServerRegisterRemoteObject {
             System.exit(1);
         }
         System.out.println("RegisterRemoteObject object was registered!");
+    }
+
+    /**
+     * Private constructor to hide the implicit public one.
+     */
+    private ServerRegisterRemoteObject() {
     }
 }

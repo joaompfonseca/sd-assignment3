@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 public interface IRefereeSite extends IRefereeSite_Referee, IRefereeSite_Coach, Remote {
     /**
      * Shutdown the server.
+     * @throws RemoteException a remote exception
      */
     public void shutdown() throws RemoteException;
 }

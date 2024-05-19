@@ -16,6 +16,7 @@ public interface IPlayground_Coach extends Remote {
      * ready. The coach waits for the trial to be decided by the referee.
      *
      * @param team the team
+     * @throws RemoteException a remote exception
      */
     public void informReferee(int team) throws RemoteException;
 }

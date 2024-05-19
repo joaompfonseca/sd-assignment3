@@ -15,8 +15,8 @@ public interface IRefereeSite_Coach extends Remote {
      * The coach waits for the referee command.
      *
      * @param team the team of the coach
-     *
      * @return true if the match has not ended, false otherwise
+     * @throws RemoteException a remote exception
      */
     public boolean reviewNotes(int team) throws RemoteException;
 }

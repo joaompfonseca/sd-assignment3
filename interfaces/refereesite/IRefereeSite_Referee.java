@@ -13,20 +13,25 @@ import java.rmi.RemoteException;
 public interface IRefereeSite_Referee extends Remote {
     /**
      * The referee announces a new game.
+     *
+     * @throws RemoteException a remote exception
      */
     public void announceNewGame() throws RemoteException;
 
     /**
      * The referee calls the trial. The referee waits for the coaches to be ready to receive the command to call the
      * trial. The coaches will know the match has not ended.
+     *
+     * @throws RemoteException a remote exception
      */
     public void callTrial() throws RemoteException;
 
     /**
      * The referee declares the team that won the game.
      *
-     * @param team the team that won the game
+     * @param team     the team that won the game
      * @param knockout true if the game was a knockout, false otherwise
+     * @throws RemoteException a remote exception
      */
     public void declareGameWinner(int team, boolean knockout) throws RemoteException;
 
@@ -35,6 +40,7 @@ public interface IRefereeSite_Referee extends Remote {
      * command to declare the match winner. The coaches will know the match has ended.
      *
      * @param team the team that won the match
+     * @throws RemoteException a remote exception
      */
     public void declareMatchWinner(int team) throws RemoteException;
 }

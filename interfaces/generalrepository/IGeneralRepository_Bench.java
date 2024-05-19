@@ -17,6 +17,7 @@ public interface IGeneralRepository_Bench extends Remote {
      * @param team             the team
      * @param id               the contestant id
      * @param increaseStrength if the strength of the contestant should be increased
+     * @throws RemoteException a remote exception
      */
     public void seatDown(int team, int id, boolean increaseStrength) throws RemoteException;
 
@@ -24,6 +25,7 @@ public interface IGeneralRepository_Bench extends Remote {
      * Set the new state of the coach when he calls the contestants.
      *
      * @param team the team
+     * @throws RemoteException a remote exception
      */
     public void callContestants(int team) throws RemoteException;
 
@@ -32,6 +34,7 @@ public interface IGeneralRepository_Bench extends Remote {
      *
      * @param team the team
      * @param id   the contestant id
+     * @throws RemoteException a remote exception
      */
     public void followCoachAdvice(int team, int id) throws RemoteException;
 }
