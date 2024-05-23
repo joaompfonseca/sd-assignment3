@@ -9,11 +9,10 @@ echo "- RMI Registry will be deployed on $NODE"
 echo "-- Transferring data to the RMI Registry node"
 sshpass -f password ssh "$NODE" "mkdir -p ~/Public/classes/interfaces"
 sshpass -f password ssh "$NODE" "rm -rf ~/Public/classes/interfaces/*"
-sshpass -f password ssh "$NODE" "rm -rf ~/dist/RMIRegistry"
 sshpass -f password scp -r dist/RMIRegistry.zip "$NODE":~
 
 echo "-- Decompressing data sent to the RMI Registry node"
-sshpass -f password ssh "$NODE" "unzip -q ~/RMIRegistry.zip -d ~"
+sshpass -f password ssh "$NODE" "unzip -uq ~/RMIRegistry.zip -d ~"
 sshpass -f password ssh "$NODE" "cp -RT ~/dist/RMIRegistry/interfaces ~/Public/classes/interfaces"
 
 echo "-- Executing the RMI Registry program"

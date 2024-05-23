@@ -7,11 +7,10 @@ CODEBASE="http://l040101-ws$MACHINE_REGISTRY.ua.pt/sd$LAB$GROUP/classes/"
 echo "- Playground will be deployed on $NODE"
 
 echo "-- Transferring data to the Playground node"
-sshpass -f password ssh "$NODE" "rm -rf ~/dist/Playground"
 sshpass -f password scp -r dist/Playground.zip "$NODE":~
 
 echo "-- Decompressing data sent to the Playground node"
-sshpass -f password ssh "$NODE" "unzip -q ~/Playground.zip -d ~"
+sshpass -f password ssh "$NODE" "unzip -uq ~/Playground.zip -d ~"
 
 echo "-- Executing the Playground program"
 sshpass -f password ssh "$NODE" "fuser -k $PORT_PLAYGROUND/tcp > /dev/null 2>&1"

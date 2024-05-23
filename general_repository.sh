@@ -7,11 +7,10 @@ CODEBASE="http://l040101-ws$MACHINE_REGISTRY.ua.pt/sd$LAB$GROUP/classes/"
 echo "- General Repository will be deployed on $NODE"
 
 echo "-- Transferring data to the General Repository node"
-sshpass -f password ssh "$NODE" "rm -rf ~/dist/GeneralRepository"
 sshpass -f password scp -r dist/GeneralRepository.zip "$NODE":~
 
 echo "-- Decompressing data sent to the General Repository node"
-sshpass -f password ssh "$NODE" "unzip -q ~/GeneralRepository.zip -d ~"
+sshpass -f password ssh "$NODE" "unzip -uq ~/GeneralRepository.zip -d ~"
 
 echo "-- Executing the General Repository program"
 sshpass -f password ssh "$NODE" "fuser -k $PORT_GENERAL_REPOSITORY/tcp > /dev/null 2>&1"

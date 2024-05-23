@@ -7,11 +7,10 @@ CODEBASE="http://l040101-ws$MACHINE_REGISTRY.ua.pt/sd$LAB$GROUP/classes/"
 echo "- Contestants Bench will be deployed on $NODE"
 
 echo "-- Transferring data to the Contestants Bench node"
-sshpass -f password ssh "$NODE" "rm -rf ~/dist/ContestantsBench"
 sshpass -f password scp -r dist/ContestantsBench.zip "$NODE":~
 
 echo "-- Decompressing data sent to the Contestants Bench node"
-sshpass -f password ssh "$NODE" "unzip -q ~/ContestantsBench.zip -d ~"
+sshpass -f password ssh "$NODE" "unzip -uq ~/ContestantsBench.zip -d ~"
 
 echo "-- Executing the Contestants Bench program"
 sshpass -f password ssh "$NODE" "fuser -k $PORT_CONTESTANTS_BENCH/tcp > /dev/null 2>&1"
