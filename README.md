@@ -4,7 +4,7 @@
 
 The assignment goal was to develop a Java RMI implementation of the "Game of the Rope", as described in the [description of the assignment](description.pdf) provided by the course's professor. The solution was implemented in Java 21 and is built on top of the first assignment (that uses reentrant locks to ensure mutual exclusion and condition variables to ensure synchronization between threads). Each envolved entity is now encapsulated in a process running on seperate machines, that communicate by remote object invocation using Java RMI.
 
-The game is played by two teams, each with 5 players and 1 coach. A referee is responsible for the flow of the game. There is a [general interaction diagram](general-interaction-diagram.pdf) to help understand the game's flow, and a [client architecture](client-architecture.pdf), [server architecture](server-architecture.pdf)  and [register remote object architecture](register-remote-object-architecture) to help understand how the client, server and remote object registry logic are implemented.
+The game is played by two teams, each with 5 players and 1 coach. A referee is responsible for the flow of the game. There is a [general interaction diagram](general-interaction-diagram.pdf) to help understand the game's flow, and a [client architecture](client-architecture.pdf), [server architecture](server-architecture.pdf)  and [register remote object architecture](register-remote-object-architecture.pdf) to help understand how the client, server and remote object registry logic are implemented.
 
 The following entities were defined:
 
